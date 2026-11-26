@@ -117,8 +117,8 @@ function App() {
         {page === "Visão geral" && <Dashboard user={user} balance={balance} income={income} expenses={expenses} showBalance={showBalance} setShowBalance={setShowBalance} data={data} expenseByCategory={expenseByCategory} maxCategory={maxCategory} setPage={setPage} openTransaction={() => setModal("transaction")} />}
         {page === "Movimentações" && <Transactions data={data} onAdd={() => setModal("transaction")} onRemove={removeTransaction} />}
         {page === "Planejamento" && <Planning data={data} expenseByCategory={expenseByCategory} editing={editingBudget} setEditing={setEditingBudget} onUpdate={updateBudget} />}
-        {page === "Metas" && <Goals data={data} onAdd={() => setModal("goal")} onUpdate={updateGoal} onDelete={id => setData(d => ({ ...d, goals: d.goals.filter(g => g.id !== id) }))} />}
-        {page === "Contas" && <Bills data={data} onAdd={() => setModal("bill")} onToggle={id => setData(d => ({ ...d, bills: d.bills.map(b => b.id === id ? { ...b, paid: !b.paid } : b) }))} onDelete={id => setData(d => ({ ...d, bills: d.bills.filter(b => b.id !== id) }))} />}
+        {page === "Metas" && <Goals data={data} onAdd={() => setModal("goal")} onUpdate={updateGoal} onDelete={(id: string) => setData(d => ({ ...d, goals: d.goals.filter(g => g.id !== id) }))} />}
+        {page === "Contas" && <Bills data={data} onAdd={() => setModal("bill")} onToggle={(id: string) => setData(d => ({ ...d, bills: d.bills.map(b => b.id === id ? { ...b, paid: !b.paid } : b) }))} onDelete={(id: string) => setData(d => ({ ...d, bills: d.bills.filter(b => b.id !== id) }))} />}
         {page === "Relatórios" && <Reports data={data} income={income} expenses={expenses} expenseByCategory={expenseByCategory} maxCategory={maxCategory} />}
         {page === "Educação financeira" && <Learning />}
         {page === "Configurações" && <Settings user={user} onLogout={logout} onReset={() => { if (confirm("Deseja apagar todos os seus dados financeiros? Essa ação não pode ser desfeita.")) { setData(starterData()); setNotice("Dados financeiros reiniciados."); } }} />}
